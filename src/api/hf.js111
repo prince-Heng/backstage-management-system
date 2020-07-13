@@ -1,0 +1,47 @@
+import request from '@/utils/request'
+
+// 表名
+
+// let baseURL = "http://www.shopvill.tm/hfapi/";
+
+const baseURL = 'http://127.0.0.1:7689'
+var api = {
+  listattr() {
+    return request.post('/sku/listattr', {})
+  },
+  skuadd(data) {
+    return request.post('/sku/skuadd', data)
+  },
+  skulist(id) {
+    return request.post('/sku/skulist', { 'id': id })
+  },
+  customerlist(id) {
+    return request.get('/user/list', { params: { dept: id }})
+  },
+
+  uploadAvatar() {
+    return baseURL + '/avatar/upload'
+  },
+  getAvatar(id) {
+    console.log('id,id')
+    if (id == undefined) { return '' }
+    return baseURL + '/avatar/img?id=' + id
+  },
+
+  cutomer_messgaelist({ uuid, dt, msgtype }) { // msgtype ==“history” 为历史数据
+    return oldrequest.get('/csmessage/list?', { params: { uuid: uuid, dt: dt, msgtype: msgtype }})
+  },
+
+  cutomer_messgaeadd(uuid, msg) {
+    return oldrequest.post('/csmessage/add', { 'uuid': uuid, 'msg': msg })
+  },
+  servicemessgaelist({ uuid, uname, dt, msgtype }) {
+    return request.get('/csmessage/listservice', { params: { uuid: uuid, uname: uname, dt: dt, msgtype: msgtype }})
+  },
+
+  servicemessgaeadd(uuid, user, msg, service) {
+    return request.post('/csmessage/addservice', { 'uuid': uuid, 'uname': user, 'msg': msg, 'service': service })
+  }
+
+}
+export default api
